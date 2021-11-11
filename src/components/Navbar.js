@@ -3,30 +3,36 @@ import styled from "styled-components";
 import { Avatar } from "@material-ui/core";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import SearchIcon from "@material-ui/icons/Search";
+import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 
-function Header() {
+function Navbar() {
   return (
-    <HeaderContainer>
+    <NavbarContainer>
       {/* Header Left */}
-      <HeaderLeft>
-        <HeaderAvatar />
+      <NavbarLeft>
+        <NavbarAvatar
+        // Add Onclick
+        />
         <AccessTimeIcon />
-      </HeaderLeft>
+      </NavbarLeft>
 
       {/* Header Search */}
-      <HeaderSearch>
+      <NavbarSearch>
         <SearchIcon />
         <input placeholder="Search MySlack" />
-      </HeaderSearch>
+      </NavbarSearch>
 
       {/* Header Right */}
-    </HeaderContainer>
+      <NavbarRight>
+        <HelpOutlineIcon />
+      </NavbarRight>
+    </NavbarContainer>
   );
 }
 
-export default Header;
+export default Navbar;
 
-const HeaderSearch = styled.div`
+const NavbarSearch = styled.div`
   flex: 0.4;
   opacity: 1;
   border-radius: 6px;
@@ -47,7 +53,7 @@ const HeaderSearch = styled.div`
   }
 `;
 
-const HeaderContainer = styled.div`
+const NavbarContainer = styled.div`
   display: flex;
   position: fixed;
   width: 100%;
@@ -58,7 +64,7 @@ const HeaderContainer = styled.div`
   color: white;
 `;
 
-const HeaderLeft = styled.div`
+const NavbarLeft = styled.div`
   flex: 0.3;
   display: flex;
   align-items: center;
@@ -70,7 +76,18 @@ const HeaderLeft = styled.div`
   }
 `;
 
-const HeaderAvatar = styled(Avatar)`
+const NavbarRight = styled.div`
+  flex: 0.3;
+  display: flex;
+  align-items: flex-end;
+
+  > .MuiSvgIcon-root {
+    margin-left: auto;
+    margin-right: 20px;
+  }
+`;
+
+const NavbarAvatar = styled(Avatar)`
   cursor: pointer;
 
   :hover {

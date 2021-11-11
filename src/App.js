@@ -1,18 +1,24 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Header from "./components/Header";
+import Navbar from "./components/Navbar";
+import Sidenav from "./components/Sidenav";
+import styled from "styled-components";
 
 function App() {
   return (
     <div className="app">
       <Router>
         <>
-          <Switch>
-            <Route path="/" exact>
-              <Header />
-            </Route>
-          </Switch>
+          <Navbar />
+          <SlackBody>
+            <Sidenav />
+            <Switch>
+              <Route path="/" exact>
+                {/* Chat */}
+              </Route>
+            </Switch>
+          </SlackBody>
         </>
       </Router>
     </div>
@@ -20,3 +26,8 @@ function App() {
 }
 
 export default App;
+
+const SlackBody = styled.div`
+  display: flex;
+  height: 100vh;
+`;
