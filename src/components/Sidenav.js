@@ -13,8 +13,12 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SidenavOption from "./SidenavOption";
 import AddIcon from "@material-ui/icons/Add";
+import { useCollection } from "react-firebase-hooks/firestore";
+import { db } from "../firebase";
 
 function Sidenav() {
+  const [channels, loading, error] = useCollection(db.collection("rooms"));
+
   return (
     <SidenavContainer>
       <SidenavHeader>
@@ -40,6 +44,10 @@ function Sidenav() {
       <SidenavOption Icon={ExpandMoreIcon} title="Channels" />
       <hr />
       <SidenavOption Icon={AddIcon} addChannelOption title="Add Channel" />
+
+      {channels?.docs.map((doc) => (
+        <SidenavOption key={doc.id} id={doc.id} title={doc.data().name} />
+      ))}
     </SidenavContainer>
   );
 }
@@ -53,6 +61,12 @@ const SidenavContainer = styled.div`
   border-top: 1px solid #49274b;
   max-width: 260px;
   margin-top: 60px;
+
+  > hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #49274b;
+  }
 `;
 
 const SidenavHeader = styled.div`
