@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Sidenav from "./components/Sidenav";
 import styled from "styled-components";
+import Chat from "./components/Chat";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
             <Sidenav />
             <Switch>
               <Route path="/" exact>
-                {/* Chat */}
+                <Chat />
               </Route>
             </Switch>
           </SlackBody>
