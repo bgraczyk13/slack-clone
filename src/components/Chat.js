@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
@@ -10,12 +10,13 @@ import { useCollection, useDocument } from "react-firebase-hooks/firestore";
 import { db } from "../firebase";
 
 function Chat() {
+  const chatRef = useRef(null);
   const roomId = useSelector(selectRoomId);
   const [roomDetails] = useDocument(
     roomId && db.collection("rooms").doc(roomId)
   );
 
-  const [roomMessages] = useCollection(
+  const [roomMessages, loading] = useCollection(
     roomId &&
       db
         .collection("rooms")
@@ -24,8 +25,9 @@ function Chat() {
         .orderBy("timestamp", "asc")
   );
 
-  console.log(roomDetails?.data());
-  console.log(roomMessages);
+  useEffect(() => {
+    chatRef?.current?.scrollIntoView();
+  }, [roomId, loading]);
 
   return (
     <ChatBox>
@@ -57,6 +59,7 @@ function Chat() {
               />
             );
           })}
+          <MessageBottom ref={chatRef} />
         </Messages>
 
         <MessageInput
@@ -69,6 +72,10 @@ function Chat() {
 }
 
 export default Chat;
+
+const MessageBottom = styled.div`
+  padding-bottom: 200px;
+`;
 
 const Chatarea = styled.div`
   display: flex;

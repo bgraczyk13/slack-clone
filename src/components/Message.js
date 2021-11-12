@@ -17,6 +17,25 @@ function Message({ message, timestamp, user, userImage }) {
 
 export default Message;
 
-const MessageBox = styled.div``;
+const MessageBox = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 20px;
 
-const ChatInfo = styled.div``;
+  > img {
+    height: 50px;
+    width: 50px;
+    border-radius: 8px;
+  }
+`;
+
+const ChatInfo = styled.div`
+  padding-left: 10px;
+
+  > h4 > span {
+    color: gray;
+    font-weight: 300;
+    margin-left: 4px;
+    font-size: 10px;
+  }
+`;
