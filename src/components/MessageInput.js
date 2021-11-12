@@ -21,7 +21,8 @@ function MessageInput({ channelName, channelId }) {
       message: input,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       user: "Robert Graczyk",
-      userImage: "./images/proffpic.jpg",
+      userImage:
+        "https://firebasestorage.googleapis.com/v0/b/slack-clone-62d87.appspot.com/o/profilepiccc.jpg?alt=media&token=d3b5cb4b-4922-4bd1-ac84-5bb9e89f96ae",
     });
 
     setInput("");

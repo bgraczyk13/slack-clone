@@ -3,6 +3,7 @@ import styled from "styled-components";
 import StarBorderOutlinedIcon from "@material-ui/icons/StarBorderOutlined";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import MessageInput from "./MessageInput";
+import Message from "./Message";
 import { useSelector } from "react-redux";
 import { selectRoomId } from "../features/appSlice";
 import { useCollection, useDocument } from "react-firebase-hooks/firestore";
@@ -42,7 +43,21 @@ function Chat() {
             </p>
           </ChatRight>
         </Chatarea>
-        <Messages>{/* List of messages */}</Messages>
+        <Messages>
+          {roomMessages?.docs.map((doc) => {
+            const { message, timestamp, user, userImage } = doc.data();
+
+            return (
+              <Message
+                key={doc.id}
+                message={message}
+                timestamp={timestamp}
+                user={user}
+                userImage={userImage}
+              />
+            );
+          })}
+        </Messages>
 
         <MessageInput
           channelName={roomDetails?.data().name}
