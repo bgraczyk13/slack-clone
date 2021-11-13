@@ -25,7 +25,7 @@ function Sidenav() {
     <SidenavContainer>
       <SidenavHeader>
         <SidenavInfo>
-          <h2>SlackCLONE Fam</h2>
+          <h2>SlackClone</h2>
           <h3>
             <FiberManualRecordIcon />
             {user?.displayName}

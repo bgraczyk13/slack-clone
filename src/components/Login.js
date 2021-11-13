@@ -18,7 +18,9 @@ function Login() {
         />
 
         <h1>Sign in Here</h1>
-        <p>https://portfolio-updated-eosin.vercel.app/</p>
+        <p>
+          Enter your workspaces's <strong>Slack URL</strong>
+        </p>
 
         <Button onClick={signIn}>Sign in with Google</Button>
       </InnerLoginBox>
@@ -42,6 +44,10 @@ const InnerLoginBox = styled.div`
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
+  > p {
+    margin-top: 20px;
+  }
+
   > img {
     object-fit: contain;
     height: 100px;
@@ -50,6 +56,7 @@ const InnerLoginBox = styled.div`
 
   > button {
     margin-top: 50px;
+    padding: 10px;
     text-transform: inherit !important;
     background-color: #0a8d48 !important;
     color: white;
