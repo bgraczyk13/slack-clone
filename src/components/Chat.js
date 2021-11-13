@@ -26,47 +26,52 @@ function Chat() {
   );
 
   useEffect(() => {
-    chatRef?.current?.scrollIntoView();
+    chatRef?.current?.scrollIntoView({
+      behavior: "smooth",
+    });
   }, [roomId, loading]);
 
   return (
     <ChatBox>
-      <>
-        <Chatarea>
-          <ChatLeft>
-            <h4>
-              <strong>#{roomDetails?.data().name}</strong>
-            </h4>
-            <StarBorderOutlinedIcon />
-          </ChatLeft>
-          <ChatRight>
-            <p>
-              <InfoOutlinedIcon /> Details
-            </p>
-          </ChatRight>
-        </Chatarea>
-        <Messages>
-          {roomMessages?.docs.map((doc) => {
-            const { message, timestamp, user, userImage } = doc.data();
+      {roomDetails && roomMessages && (
+        <>
+          <Chatarea>
+            <ChatLeft>
+              <h4>
+                <strong>#{roomDetails?.data().name}</strong>
+              </h4>
+              <StarBorderOutlinedIcon />
+            </ChatLeft>
+            <ChatRight>
+              <p>
+                <InfoOutlinedIcon /> Details
+              </p>
+            </ChatRight>
+          </Chatarea>
+          <Messages>
+            {roomMessages?.docs.map((doc) => {
+              const { message, timestamp, user, userImage } = doc.data();
 
-            return (
-              <Message
-                key={doc.id}
-                message={message}
-                timestamp={timestamp}
-                user={user}
-                userImage={userImage}
-              />
-            );
-          })}
-          <MessageBottom ref={chatRef} />
-        </Messages>
+              return (
+                <Message
+                  key={doc.id}
+                  message={message}
+                  timestamp={timestamp}
+                  user={user}
+                  userImage={userImage}
+                />
+              );
+            })}
+            <MessageBottom ref={chatRef} />
+          </Messages>
 
-        <MessageInput
-          channelName={roomDetails?.data().name}
-          channelId={roomId}
-        />
-      </>
+          <MessageInput
+            chatRef={chatRef}
+            channelName={roomDetails?.data().name}
+            channelId={roomId}
+          />
+        </>
+      )}
     </ChatBox>
   );
 }

@@ -14,10 +14,12 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SidenavOption from "./SidenavOption";
 import AddIcon from "@material-ui/icons/Add";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function Sidenav() {
-  const [channels, loading, error] = useCollection(db.collection("rooms"));
+  const [channels] = useCollection(db.collection("rooms"));
+  const [user] = useAuthState(auth);
 
   return (
     <SidenavContainer>
@@ -26,7 +28,7 @@ function Sidenav() {
           <h2>SlackCLONE Fam</h2>
           <h3>
             <FiberManualRecordIcon />
-            Robert Graczyk
+            {user?.displayName}
           </h3>
         </SidenavInfo>
         <CreateIcon />

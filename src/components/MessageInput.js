@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
 import firebase from "firebase";
 import { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-function MessageInput({ channelName, channelId }) {
+function MessageInput({ channelName, channelId, chatRef }) {
   const [input, setInput] = useState("");
+  const [user] = useAuthState(auth);
 
   const sendMessage = (e) => {
     e.preventDefault(); // Prevents refresh
-
-    console.log(channelId);
 
     if (!channelId) {
       return false;
@@ -20,9 +20,12 @@ function MessageInput({ channelName, channelId }) {
     db.collection("rooms").doc(channelId).collection("messages").add({
       message: input,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      user: "Robert Graczyk",
-      userImage:
-        "https://firebasestorage.googleapis.com/v0/b/slack-clone-62d87.appspot.com/o/profilepiccc.jpg?alt=media&token=d3b5cb4b-4922-4bd1-ac84-5bb9e89f96ae",
+      user: user.displayName,
+      userImage: user.photoURL,
+    });
+
+    chatRef.current.scrollIntoView({
+      behavior: "smooth",
     });
 
     setInput("");
