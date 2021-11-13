@@ -25,7 +25,7 @@ function Navbar() {
       {/* Header Search */}
       <NavbarSearch>
         <SearchIcon />
-        <input placeholder="Search MySlack" />
+        <input placeholder={`Search Slack Clone`} />
       </NavbarSearch>
 
       {/* Header Right */}
